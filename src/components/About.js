@@ -9,7 +9,7 @@ export default function About() {
                 The images (and all data) used by this app are fetched from the DeviantArt's REST APIs.
             </p>
             <p>
-                <a href="https://github.com/pedropmota/react-devart">Project on Github</a>
+                <a href="https://github.com/pedropmota/react-dev-arts">Project on Github</a>
             </p>
 
             <h2 style={{ marginTop: '60px' }}>About DeviantArt</h2>

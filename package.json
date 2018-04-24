@@ -2,7 +2,7 @@
   "name": "dev-art",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://pedropmota.github.io/react-devart/",
+  "homepage": "http://pedropmota.github.io/react-dev-arts/",
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.5",
     "@fortawesome/fontawesome-free-regular": "^5.0.9",
