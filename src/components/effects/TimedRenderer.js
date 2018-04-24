@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/**
- * TODO:
- * - Make it possible for the interval to change by each item, by accepting a function as the interval. 
- */
-
-const TimedRenderer = ({ data, interval = 0, startAtIndex = 0, renderOnStart = false, renderItem /*, waitToStart = false,  */ }) => {
+const TimedRenderer = ({ data, interval = 0, startAtIndex = 0, renderOnStart = false, renderItem }) => {
 
     const items = Array.isArray(data) ? data : [data];
 
     return items.map((item, index) => {
 
-        const timeoutToAnimate = index < startAtIndex ? 0 : ((index - startAtIndex + 1) * interval);
+        const calculatedInterval = typeof interval === 'function' ? interval(item, index) : interval;
+
+        const timeoutToAnimate = index < startAtIndex ? 0 : ((index - startAtIndex + 1) * calculatedInterval);
 
         return (
             <TimedRendererItem
@@ -31,7 +28,6 @@ class TimedRendererItem extends React.Component {
     state = {  timeoutCompleted: false, timeoutKey: null }
     
     componentDidMount() {
-        //const { iterator, interval, startAtIndex, renderOnStart, renderItem } = this.props;
         const { timeoutToAnimate } = this.props;
 
         if (timeoutToAnimate === 0) {
@@ -70,7 +66,10 @@ class TimedRendererItem extends React.Component {
 
 TimedRenderer.propTypes = {
     data: PropTypes.any.isRequired, 
-    interval: PropTypes.number.isRequired, 
+    interval: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.func
+    ]).isRequired, 
     startAtIndex: PropTypes.number, 
     renderOnStart: PropTypes.bool,
     renderItem: PropTypes.func.isRequired
