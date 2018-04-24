@@ -6,6 +6,7 @@ import SearchInput from './SearchInput';
 import ArtList from './ArtList';
 import WindowScrollChecker from './effects/WindowScrollChecker';
 
+
 class Browse extends React.Component   {
 
     constructor(props) {
@@ -15,7 +16,7 @@ class Browse extends React.Component   {
             devArts: [],
             savedItems: [],
             browsedAt: null,
-            lastRenderedCount: 0,
+            previouslyRenderedCount: 0,
             nextOffset: 0,
             hasMore: false,
             searchTerm: null,
@@ -83,7 +84,9 @@ class Browse extends React.Component   {
     }
 
     render() {
-        const { devArts, savedItems, previouslyRenderedCount, isBrowsing, browsedAt } = this.state;
+        const { devArts, savedItems, previouslyRenderedCount, isBrowsing, browsedAt, isLoadingMore, hasMore } = this.state;
+        
+        const noResults = browsedAt && !devArts.length;
 
         return (
             <div>
@@ -94,6 +97,10 @@ class Browse extends React.Component   {
                 
                 <SearchInput isLoading={isBrowsing} onSearch={(term) => this.onBrowse(term)} /> 
                 
+                {noResults ?
+                    <p style={{ margin: '12px' }}>Sorry, no pieces found. Try searching for something different. :)</p> 
+                : null}
+
                 <ArtList
                     key={browsedAt}
                     devArts={devArts} 
@@ -102,17 +109,17 @@ class Browse extends React.Component   {
                     onSaveItem={(item) => this.saveItem(item)}
                     onRemoveItem={(item) => this.removeItem(item)} />
 
-                {this.state.isLoadingMore ? (
+                {isLoadingMore ? (
                     <div style={{ clear: 'both', margin: '20px', fontSize: '18px' }}>
                         <span>Loading More...</span>
                     </div>
                 ) : null}
         
                 <WindowScrollChecker 
-                    active={this.state.hasMore}
+                    active={hasMore}
                     offset={200}
                     mainContainerId='root'
-                    isHandlingScroll={this.state.isLoadingMore}
+                    isHandlingScroll={isLoadingMore}
                     handleScroll={() => this.loadMore()}/>
 
             </div>    
