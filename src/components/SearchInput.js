@@ -17,7 +17,7 @@ class SearchInput extends React.Component  {
 
     handleInitialLoad = () => {
         const previouslySearchedTerm = this.retrieveSearchTerm();
-
+        
         if (previouslySearchedTerm !== null) {
             this.setState({
                 searchTerm: previouslySearchedTerm
@@ -26,7 +26,6 @@ class SearchInput extends React.Component  {
             this.props.onSearch(previouslySearchedTerm);
         }
     }
-
 
     handleInputChange = (event) => {
         const term = event.target.value;
@@ -45,11 +44,11 @@ class SearchInput extends React.Component  {
     }
 
     storeSearchTerm = (term) => {
-        sessionStorage.setItem('search-term', term);
+        window.searchTerm = term;
     }
 
     retrieveSearchTerm = () => {
-        return sessionStorage.getItem('search-term');
+        return window.searchTerm !== undefined ? window.searchTerm : null;
     }
 
 
