@@ -1,0 +1,16 @@
+.ui.button.browse-button {
+    font-size: 15px !important; 
+    background-color: #487e8e !important;
+}
+
+.ui.button.browse-button:hover {
+    background-color: #61a3b7;
+}
+
+.ui.input.browse-input {
+    width: 400px;
+    margin: 9px 0 4px;
+    height: 46px;
+    max-width: 90%;
+    font-size: 18px;
+}

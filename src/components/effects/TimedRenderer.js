@@ -1,0 +1,79 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+/**
+ * TODO:
+ * - Make it possible for the interval to change by each item, by accepting a function as the interval. 
+ */
+
+const TimedRenderer = ({ data, interval = 0, startAtIndex = 0, renderOnStart = false, renderItem /*, waitToStart = false,  */ }) => {
+
+    const items = Array.isArray(data) ? data : [data];
+
+    return items.map((item, index) => {
+
+        const timeoutToAnimate = index < startAtIndex ? 0 : ((index - startAtIndex + 1) * interval);
+
+        return (
+            <TimedRendererItem
+                key={index}
+                item={item}
+                timeoutToAnimate={timeoutToAnimate}
+                renderOnStart={renderOnStart}
+                renderItem={renderItem} />
+        );
+    });
+}
+
+
+class TimedRendererItem extends React.Component {
+    
+    state = {  timeoutCompleted: false, timeoutKey: null }
+    
+    componentDidMount() {
+        //const { iterator, interval, startAtIndex, renderOnStart, renderItem } = this.props;
+        const { timeoutToAnimate } = this.props;
+
+        if (timeoutToAnimate === 0) {
+            this.setState({ timeoutCompleted: true });            
+            return;
+        }
+
+        const timeoutKey = setTimeout(() => this.onTimeoutCompleted(), timeoutToAnimate);
+
+        this.setState({ timeoutKey: timeoutKey });
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.state.timeoutKey);
+    }
+
+    onTimeoutCompleted() {
+        this.setState({ 
+            timeoutCompleted: true
+        });
+    }
+
+
+    render() {
+        if (this.state.timeoutCompleted || this.props.renderOnStart) {
+            return this.props.renderItem({ 
+                item: this.props.item, 
+                timeoutCompleted: this.state.timeoutCompleted, 
+            })
+        }
+        else {
+            return null;
+        }
+    }
+}
+
+TimedRenderer.propTypes = {
+    data: PropTypes.any.isRequired, 
+    interval: PropTypes.number.isRequired, 
+    startAtIndex: PropTypes.number, 
+    renderOnStart: PropTypes.bool,
+    renderItem: PropTypes.func.isRequired
+}
+
+export default TimedRenderer;

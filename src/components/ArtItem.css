@@ -1,0 +1,136 @@
+.flex-list-item {
+    flex-grow: 1;
+    object-fit: cover;
+}
+
+/* Prevents the last items from auto-expanding horizontally */
+.flex-list-item:nth-last-child(7),
+.flex-list-item:nth-last-child(7) ~ .flex-list-item {
+  flex-grow: 0;
+}
+
+
+.item-container {
+    max-height: 251px;
+    min-height: 200px;
+    min-width: 180px;
+
+    margin: 13px 7px;
+    height: 268px;
+}
+
+.item-container-inner {
+    border: 1px solid #7b7b7b;
+    background-color: #e4e4e4;
+    border-radius: 4px;
+    box-shadow: 0px 0px 6px 3px #ccc;
+    position: relative;
+}
+
+.item-container-inner {
+    transition: transform 200ms, box-shadow 300ms;
+}
+.item-container:not(:only-child) .item-container-inner:hover  {
+    transform: scale(1.06);
+    box-shadow: 0px 0px 8px 5px #ccc;
+}
+
+.item-container-img-wrapper {
+    height: 100%;
+    line-height: 260px;
+}
+
+.item-title {
+    text-align: left;
+    margin-top: 53px;
+    margin-left: 9px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.item-container img {
+    max-height: 251px;
+    max-width: 380px;
+    vertical-align: middle;
+}
+
+.zoomed-img {
+    max-height: 95% !important;  
+    max-width: 95% !important; 
+
+    /*vertically aligning img: */
+    width: auto;
+    height: auto;
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;
+    right: 0;  
+    margin: auto;
+}
+
+
+.item-buttons {
+    display: none;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 123px;
+
+    background-color: white;
+    margin: 1px auto;
+    padding: 7px 5px;
+    border-radius: 0 0 3px 3px;
+    text-align: right;
+}
+
+.item-buttons.show {
+    display: block;
+}
+
+/* Gradient: */
+.item-buttons {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,ffffff+100&0+0,0.65+100 */
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 14%,rgba(255,255,255,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 14%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 14%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+.button {
+    cursor: pointer;
+    margin: 2px 5px 0;
+    padding: 6px;
+    background-color: #efefef;
+    border: 0;
+    border-radius: 3px;
+    box-shadow: 0px 1px 5px 1px #777;
+}
+
+.button:hover {
+    background-color: white;
+    box-shadow: 0px 3px 5px 1px #777;
+}
+
+.button > svg {
+    color: #363636;
+}
+
+.button.saved > svg {
+    color: #4196ad;
+}
+
+.button svg {
+    width: 0.8em !important;
+    height: 0.8em !important;
+}
+
+
+.ui.popup {
+    padding: 9px 14px !important;
+    font-size: 15px !important;
+}
