@@ -31,10 +31,10 @@ const MainMenu = () =>
         </Segment>
 
         <Switch>
-            <Route path="/" component={Browse} />
+            
             <Route path="/saved" component={Saved} />
             <Route path="/about" component={About} />
-            
+            <Route exact path="/" component={Browse} />
         </Switch>
 
     </div>
