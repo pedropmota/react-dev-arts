@@ -35,7 +35,13 @@ class SearchInput extends React.Component  {
         });
     }
 
-    handleBrowse = () => {
+    handleKeyPress = (event) => {
+        if (event.key == 'Enter') {
+            this.doSearch();
+        }
+    }
+
+    doSearch = () => {
         const { searchTerm } = this.state;
 
         this.storeSearchTerm(searchTerm);
@@ -58,8 +64,9 @@ class SearchInput extends React.Component  {
         return (
             <div>
                 <Input 
-                    onChange={this.handleInputChange} 
-                    value={this.state.searchTerm} 
+                    onChange={this.handleInputChange}
+                    onKeyPress={this.handleKeyPress} 
+                    value={this.state.searchTerm}
                     placeholder="Search..." 
                     className="browse-input"
                     action
@@ -71,7 +78,7 @@ class SearchInput extends React.Component  {
                         loading={isLoading} 
                         primary 
                         className="browse-button"
-                        onClick={this.handleBrowse}>
+                        onClick={this.doSearch}>
                             Browse
                     </Button>
                 </Input>
