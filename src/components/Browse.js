@@ -75,8 +75,7 @@ class Browse extends React.Component   {
 
     
     saveItem(item) {
-        DevArtsDb.addItem(item).then(savedItems => 
-            console.log(savedItems));
+        DevArtsDb.addItem(item);
     }
 
     removeItem(item) {
